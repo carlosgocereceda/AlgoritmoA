@@ -62,10 +62,29 @@ public class Algoritmo {
 					abierta.add(res_exp.get(i));
 				}
 			}
+			cerrada.add(nodo_expandir);
+			if(cerrada.contains(nodos.get(y_meta).get(x_meta))){
+				meta = true;
+			}
 			//System.out.println("pausa");
 		}
 		dibuja();
+		System.out.println("Lista De Cerrados");
+		for(int i= 0; i < cerrada.size(); i++) {
+			System.out.println("x: " + cerrada.get(i).getX() + " y: " + cerrada.get(i).getY());
+		}
+		System.out.println("---------------------------");
+		dibujaSol();
 		System.out.println("PAUSA");
+		
+	}
+	private void dibujaSol() {
+		Nodo aux = nodos.get(y_meta).get(x_meta);
+		while(aux.getPadre() != null) {
+			System.out.println("x: " + aux.getX() + " y: " + aux.getY());
+			aux = aux.getPadre();
+		}
+		System.out.println("x: " + aux.getX() + " y: " + aux.getY());
 		
 	}
 	private double calculaDistanciaOrigen(Nodo nodo) {
