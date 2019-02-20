@@ -3,7 +3,6 @@ package algoritmoA;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Random;
 
 public class Algoritmo {
 	
@@ -55,7 +54,6 @@ public class Algoritmo {
 			for(int i = 0; i < res_exp.size(); i++) {
 				if(!abierta.contains(res_exp.get(i)) && !cerrada.contains(res_exp.get(i))) {
 					res_exp.get(i).setPadre(nodo_expandir);
-					System.out.println("PAUSA");
 					res_exp.get(i).setD(calculaDistancia(res_exp.get(i).getX(), res_exp.get(i).getY()));
 					res_exp.get(i).setDistanciaTotal(calculaDistanciaOrigen(res_exp.get(i)) + 
 							res_exp.get(i).getD());
@@ -75,7 +73,6 @@ public class Algoritmo {
 		}
 		System.out.println("---------------------------");
 		dibujaSol();
-		System.out.println("PAUSA");
 		
 	}
 	private void dibujaSol() {
@@ -140,7 +137,6 @@ public class Algoritmo {
 		return res;
 	}
 	private void transforma(ArrayList<ArrayList<Integer>> tablero, int filas, int columnas) {
-		Random r = new Random();
 		for(int i = 0; i < filas; i++) {
 			//tablero.add(new ArrayList<Integer>());
 			nodos.add(new ArrayList<Nodo>());
