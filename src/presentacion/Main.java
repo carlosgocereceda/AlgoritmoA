@@ -34,7 +34,7 @@ public class Main {
 		tablero.get(1).set(3, 1);
 		tablero.get(2).set(3, 1);
 		tablero.get(2).set(5, 3);
-		Algoritmo a = new Algoritmo(tablero, 6,7);
+		Algoritmo a = new Algoritmo(tablero, 6,7, 5,2, 1,1);
 		System.out.println("PAUSA");
 	}
 
