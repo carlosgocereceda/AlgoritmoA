@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -27,10 +26,6 @@ public class Tablero extends JPanel {
 
 	public Tablero(int capacidad) {
 		botones = new JButton[capacidad][capacidad];
-
-		// SE CREA UN OYENTE DE ACCIONES Y SE LE PASA EL
-		// PANEL COMO ARGUMENTO
-		Action oyenteAcciones = new Action(this);
 		setLayout(new GridLayout(capacidad, capacidad));
 		this.setSize(new Dimension(500,500));
 
