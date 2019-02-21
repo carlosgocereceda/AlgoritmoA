@@ -75,13 +75,17 @@ public class Algoritmo {
 		dibujaSol();
 		
 	}
-	private void dibujaSol() {
-		Nodo aux = nodos.get(y_meta).get(x_meta);
+	public ArrayList<Nodo> dibujaSol() {
+		ArrayList<Nodo> sol = new ArrayList<Nodo>();
+		Nodo aux = nodos.get(y_meta).get(x_meta).getPadre();
 		while(aux.getPadre() != null) {
 			System.out.println("x: " + aux.getX() + " y: " + aux.getY());
+			sol.add(aux);
 			aux = aux.getPadre();
 		}
+		//sol.remove(sol.size()-1);
 		System.out.println("x: " + aux.getX() + " y: " + aux.getY());
+		return sol;
 		
 	}
 	private double calculaDistanciaOrigen(Nodo nodo) {
