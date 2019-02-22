@@ -2,11 +2,7 @@ package presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
-
-import algoritmoA.Algoritmo;
 
 public class Main {
 
