@@ -28,6 +28,7 @@ public class Botones extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				ArrayList<ArrayList<Integer>> tablero = new ArrayList<ArrayList<Integer>>();
 				int x_meta = 0, y_meta = 0, x_salida = 0, y_salida = 0;
+				Tablero.getTablero(0).initializeWayPoints(Tablero.getTablero(0).getMetas());
 				JButton[][] botones = Tablero.getTablero(0).getBotones();
 				for(int i = 0; i < botones.length; i++) {
 					tablero.add(new ArrayList<Integer>());
@@ -43,19 +44,32 @@ public class Botones extends JPanel {
 							x_salida = j;
 							y_salida = i;
 						}
-						else if(botones[i][j].getBackground() == Color.blue) {
+						else if(botones[i][j].getBackground() == Color.cyan) {
+							TButton wayPoint = new TButton(j,i);
+							Tablero.getTablero(0).getWayPoints().set(Integer.parseInt(botones[i][j].getText())-1, wayPoint);
 							tablero.get(i).add(3);
 							x_meta = j;
 							y_meta = i;
 						}
 					}
 				}
-				Algoritmo a = new Algoritmo(tablero, botones.length, botones[0].length,
-						x_meta ,y_meta, x_salida, y_salida);
-				ArrayList<Nodo> solucion = a.dibujaSol();
-				for(int i = 0; i < solucion.size(); i++) {
-					botones[solucion.get(i).getY()][solucion.get(i).getX()].setBackground(Color.orange);
+				ArrayList<Nodo> solFinales = new ArrayList<Nodo>();
+				for(int i = 0; i < Tablero.getTablero(0).getWayPoints().size(); i++) {
+					Algoritmo a = new Algoritmo(tablero, botones.length, botones[0].length,
+							Tablero.getTablero(0).getWayPoints().get(i).getX() ,
+							Tablero.getTablero(0).getWayPoints().get(i).getY(), x_salida, y_salida);
+					ArrayList<Nodo> solucion = a.dibujaSol();
+					solFinales.addAll(solucion);
+					/*for(int j = 0; j < solucion.size(); j++) {
+						botones[solucion.get(i).getY()][solucion.get(i).getX()].setBackground(Color.orange);
+					}*/
 				}
+				for(int i=0; i < solFinales.size(); i++) {
+					System.out.println("x " + solFinales.get(i).getX() + " y " + solFinales.get(i).getY());
+					botones[solFinales.get(i).getY()][solFinales.get(i).getX()].setBackground(Color.orange);
+				}
+				//System.out.println(solFinales);
+				
 				
 			}
 		});

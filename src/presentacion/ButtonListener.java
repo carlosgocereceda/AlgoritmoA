@@ -22,15 +22,31 @@ public class ButtonListener implements ActionListener{
 			((JButton)e.getSource()).setBackground(Color.yellow);
 			t.setSalidas(t.getSalidas()+1);
 		}
-		else if(t.getMetas() == 0) {
+		else {
+			if(((JButton)e.getSource()).getBackground() == Color.green) {
+				((JButton)e.getSource()).setBackground(Color.red);
+			}
+			else if(((JButton)e.getSource()).getBackground() == Color.red) {
+				((JButton)e.getSource()).setBackground(Color.cyan);
+				t.setMetas(t.getMetas()+1);
+				((JButton)e.getSource()).setText(String.valueOf(t.getMetas()));
+			}
+			else if(((JButton)e.getSource()).getBackground() == Color.cyan) {
+				((JButton)e.getSource()).setBackground(Color.green);
+				t.setMetas(t.getMetas()-1);
+				((JButton)e.getSource()).setText("");
+			}
+		}
+		/*else if(t.getMetas() == 0) {
 			//((JButton)e.getSource()).setIcon(meta);
 			((JButton)e.getSource()).setBackground(Color.blue);
 			t.setMetas(t.getMetas()+1);
+			((JButton)e.getSource()).setText("1");
 		}
 		else {
 			((JButton)e.getSource()).setIcon(null);
 			((JButton)e.getSource()).setBackground(Color.red);
-		}
+		}*/
 		/*if(((JButton)e.getSource()).get == Color.red) {
 			
 		}

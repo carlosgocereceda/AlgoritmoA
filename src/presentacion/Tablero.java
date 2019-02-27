@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ public class Tablero extends JPanel {
 	private int salidas = 0;
 	private static Tablero tablero;
 	private JButton[][] botones;
+	private ArrayList<TButton> wayPoints;
 
 	public static Tablero getTablero(int capacidad) {
 		if(tablero == null) {
@@ -28,6 +30,7 @@ public class Tablero extends JPanel {
 		botones = new JButton[capacidad][capacidad];
 		setLayout(new GridLayout(capacidad, capacidad));
 		this.setSize(new Dimension(500,500));
+		setWayPoints(new ArrayList<TButton>());
 
 		//ImageIcon icono = new ImageIcon("cesped.jpg");
 		for (int i = 0; i < botones.length; i++) {
@@ -67,5 +70,18 @@ public class Tablero extends JPanel {
 
 	public void setBotones(JButton[][] botones) {
 		this.botones = botones;
+	}
+	public void initializeWayPoints(int size) {
+		for(int i = 0; i < size; i++) {
+			this.wayPoints.add(null);
+		}
+	}
+
+	public ArrayList<TButton> getWayPoints() {
+		return wayPoints;
+	}
+
+	public void setWayPoints(ArrayList<TButton> wayPoints) {
+		this.wayPoints = wayPoints;
 	}
 }

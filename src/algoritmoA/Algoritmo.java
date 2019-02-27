@@ -72,7 +72,7 @@ public class Algoritmo {
 			System.out.println("x: " + cerrada.get(i).getX() + " y: " + cerrada.get(i).getY());
 		}
 		System.out.println("---------------------------");
-		dibujaSol();
+		//dibujaSol();
 		
 	}
 	public ArrayList<Nodo> dibujaSol() {
