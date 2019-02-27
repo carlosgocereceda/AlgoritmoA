@@ -54,10 +54,13 @@ public class Botones extends JPanel {
 					}
 				}
 				ArrayList<Nodo> solFinales = new ArrayList<Nodo>();
-				for(int i = 0; i < Tablero.getTablero(0).getWayPoints().size(); i++) {
+				Tablero.getTablero(0).getWayPoints().add(0, new TButton(x_salida, y_salida));
+				for(int i = 0; i < Tablero.getTablero(0).getWayPoints().size()-1; i++) {
 					Algoritmo a = new Algoritmo(tablero, botones.length, botones[0].length,
-							Tablero.getTablero(0).getWayPoints().get(i).getX() ,
-							Tablero.getTablero(0).getWayPoints().get(i).getY(), x_salida, y_salida);
+							Tablero.getTablero(0).getWayPoints().get(i+1).getX() ,
+							Tablero.getTablero(0).getWayPoints().get(i+1).getY(), 
+							Tablero.getTablero(0).getWayPoints().get(i).getX(),
+							Tablero.getTablero(0).getWayPoints().get(i).getY());
 					ArrayList<Nodo> solucion = a.dibujaSol();
 					solFinales.addAll(solucion);
 					/*for(int j = 0; j < solucion.size(); j++) {
