@@ -50,9 +50,9 @@ public class Algoritmo {
 		boolean meta = false;
 		while(!abierta.isEmpty() && !meta) {
 			Nodo nodo_expandir = abierta.remove();
-			ArrayList<Nodo> res_exp = expandir(nodo_expandir.getX(), nodo_expandir.getY());
+			ArrayList<Nodo> res_exp = expandir(nodo_expandir,nodo_expandir.getX(), nodo_expandir.getY());
 			for(int i = 0; i < res_exp.size(); i++) {
-				if(!abierta.contains(res_exp.get(i)) && !cerrada.contains(res_exp.get(i))) {
+				if(!cerrada.contains(res_exp.get(i)) && !abierta.contains(res_exp.get(i))) {
 					res_exp.get(i).setPadre(nodo_expandir);
 					res_exp.get(i).setD(calculaDistancia(res_exp.get(i).getX(), res_exp.get(i).getY()));
 					res_exp.get(i).setDistanciaTotal(calculaDistanciaOrigen(res_exp.get(i)) + 
@@ -96,49 +96,112 @@ public class Algoritmo {
 		}
 		return total;
 	}
-	private ArrayList<Nodo> expandir(int x, int y){
+	private ArrayList<Nodo> expandir(Nodo padre, int x, int y){
 		ArrayList<Nodo> res = new ArrayList<Nodo>();
 		if(y-1 >= 0 && nodos.get(y-1).get(x).getTipo() != 1) {
 			//arriba, no es una casilla prohibida y no está en cerrada
-			nodos.get(y-1).get(x).setDistanciaPadre(1);
-			res.add(nodos.get(y-1).get(x));
+			if(nodos.get(y-1).get(x).getPadre() == null) {
+				nodos.get(y-1).get(x).setDistanciaPadre(1);
+				res.add(nodos.get(y-1).get(x));
+			}
+			else {
+				reevalua(nodos.get(y-1).get(x), padre, 1);
+			}
 		}
 		if(y+1 < nodos.size() && nodos.get(y+1).get(x).getTipo() != 1) {
 			//abajo
-			nodos.get(y+1).get(x).setDistanciaPadre(1);
-			res.add(nodos.get(y+1).get(x));
+			if(nodos.get(y+1).get(x).getPadre() == null) {
+				nodos.get(y+1).get(x).setDistanciaPadre(1);
+				res.add(nodos.get(y+1).get(x));
+			}
+			else {
+				reevalua(nodos.get(y+1).get(x), padre, 1);
+			}
 		}
 		if(x-1 >= 0 && nodos.get(y).get(x-1).getTipo() != 1) {
 			//izquierda
-			nodos.get(y).get(x-1).setDistanciaPadre(1);
-			res.add(nodos.get(y).get(x-1));
+			if(nodos.get(y).get(x-1).getPadre() == null) {
+				nodos.get(y).get(x-1).setDistanciaPadre(1);
+				res.add(nodos.get(y).get(x-1));
+			}
+			else {
+				reevalua(nodos.get(y).get(x-1), padre, 1);
+			}
 		}
 		if(x+1 < nodos.get(x).size() && nodos.get(y).get(x+1).getTipo() != 1) {
 			//derecha
-			nodos.get(y).get(x+1).setDistanciaPadre(1);
-			res.add(nodos.get(y).get(x+1));
+			if(nodos.get(y).get(x+1).getPadre() == null) {
+				nodos.get(y).get(x+1).setDistanciaPadre(1);
+				res.add(nodos.get(y).get(x+1));
+			}
+			else {
+				reevalua(nodos.get(y).get(x+1), padre, 1);
+			}
 		}
 		if(x+1 < nodos.get(x).size() && y-1 >= 0 && nodos.get(y-1).get(x+1).getTipo() != 1) {
 			//noreste
-			nodos.get(y-1).get(x+1).setDistanciaPadre(Math.sqrt(2.0));
-			res.add(nodos.get(y-1).get(x+1));
+			if(nodos.get(y-1).get(x+1).getPadre() == null) {
+				nodos.get(y-1).get(x+1).setDistanciaPadre(Math.sqrt(2.0));
+				res.add(nodos.get(y-1).get(x+1));
+			}
+			else {
+				reevalua(nodos.get(y-1).get(x+1), padre, Math.sqrt(2.0));
+			}
 		}
 		if(x+1 < nodos.get(x).size() && y+1 < nodos.size() && nodos.get(y+1).get(x+1).getTipo() != 1) {
 			//sureste
-			nodos.get(y+1).get(x+1).setDistanciaPadre(Math.sqrt(2.0));
-			res.add(nodos.get(y+1).get(x+1));
+			if(nodos.get(y+1).get(x+1).getPadre() == null) {
+				nodos.get(y+1).get(x+1).setDistanciaPadre(Math.sqrt(2.0));
+				res.add(nodos.get(y+1).get(x+1));
+			}else {
+				reevalua(nodos.get(y+1).get(x+1), padre, Math.sqrt(2.0));
+			}
 		}
 		if(x-1 >= 0 && y+1 < nodos.size() && nodos.get(y+1).get(x-1).getTipo() != 1) {
 			//suroeste
-			nodos.get(y+1).get(x-1).setDistanciaPadre(Math.sqrt(2.0));
-			res.add(nodos.get(y+1).get(x-1));
+			if(nodos.get(y+1).get(x-1).getPadre() == null) {
+				nodos.get(y+1).get(x-1).setDistanciaPadre(Math.sqrt(2.0));
+				res.add(nodos.get(y+1).get(x-1));
+			}else {
+				reevalua(nodos.get(y+1).get(x-1), padre, Math.sqrt(2.0));
+			}
 		}
 		if(x-1 >= 0 && y-1 >= 0 && nodos.get(y-1).get(x-1).getTipo() != 1) {
 			//noroeste
-			nodos.get(y-1).get(x-1).setDistanciaPadre(Math.sqrt(2.0));
-			res.add(nodos.get(y-1).get(x-1));
+			if(nodos.get(y-1).get(x-1).getPadre() == null) {
+				nodos.get(y-1).get(x-1).setDistanciaPadre(Math.sqrt(2.0));
+				res.add(nodos.get(y-1).get(x-1));
+			}else {
+				reevalua(nodos.get(y-1).get(x-1), padre, Math.sqrt(2.0));
+			}
 		}
 		return res;
+	}
+	private void reevalua(Nodo nodoRecalcular, Nodo posibleNuevoPadre, double distEntreEllos) {
+		double distOriginal = 0.0;
+		double distNueva = 0.0;
+		distNueva += distEntreEllos;
+		Nodo aux = nodoRecalcular;
+		while(aux.getPadre() != null) {
+			distOriginal += aux.getDistanciaPadre();
+			aux = aux.getPadre();
+			/*
+			 * res_exp.get(i).setD(calculaDistancia(res_exp.get(i).getX(), res_exp.get(i).getY()));
+					res_exp.get(i).setDistanciaTotal(calculaDistanciaOrigen(res_exp.get(i)) + 
+							res_exp.get(i).getD());
+			 */
+		}
+		aux = posibleNuevoPadre;
+		while(aux.getPadre() != null) {
+			distNueva += aux.getDistanciaPadre();
+			aux = aux.getPadre();
+		}
+		if(distNueva < distOriginal) {
+			nodoRecalcular.setPadre(posibleNuevoPadre);
+			nodoRecalcular.setDistanciaTotal(distNueva + nodoRecalcular.getD());
+		}
+		
+		
 	}
 	private void transforma(ArrayList<ArrayList<Integer>> tablero, int filas, int columnas) {
 		for(int i = 0; i < filas; i++) {
