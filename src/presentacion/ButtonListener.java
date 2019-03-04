@@ -33,6 +33,19 @@ public class ButtonListener implements ActionListener{
 			}
 			else if(((JButton)e.getSource()).getBackground() == Color.cyan) {
 				((JButton)e.getSource()).setBackground(Color.green);
+				int metaCambiada = Integer.parseInt(((JButton)e.getSource()).getText());
+				System.out.println(metaCambiada);
+				for(int i =0 ; i < t.getBotones().length; i++) {
+					for(int j = 0; j < t.getBotones()[i].length; j++) {
+						if(t.getBotones()[j][i].getText() != "") {
+							int aux = Integer.parseInt(t.getBotones()[j][i].getText());
+							if(aux > metaCambiada) {
+								t.getBotones()[j][i].setText(String.valueOf(aux -1));
+							}
+						}
+					}
+				}
+				
 				t.setMetas(t.getMetas()-1);
 				((JButton)e.getSource()).setText("");
 			}
@@ -51,6 +64,9 @@ public class ButtonListener implements ActionListener{
 			
 		}
 		((JButton)e.getSource()).setBackground(Color.red);*/
+		
+	}
+	private void recalculaMetas() {
 		
 	}
 
