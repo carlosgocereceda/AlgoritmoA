@@ -1,7 +1,8 @@
 package algoritmoA;
 
 public class Nodo {
-	private int tipo; //0 -> casilla normal, 1 -> casilla prohibida, 2-> inicial, 3 -> meta
+	private int tipo; 
+	//0 -> casilla normal, 1 -> casilla prohibida, 2-> inicial, 3 -> meta, 4 -> penalizacion
 	private Nodo padre;
 	private double distanciaMeta;
 	private double distanciaPadre;

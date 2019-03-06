@@ -12,7 +12,7 @@ public class Main {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setSize(600, 600);
 		Tablero tablero = Tablero.getTablero(7);
-		Botones botones = new Botones();
+		Botones botones = Botones.getBotones();
 		botones.setSize(new Dimension(20,20));
 		ventana.add(tablero, BorderLayout.CENTER);
 		ventana.add(botones, BorderLayout.SOUTH);

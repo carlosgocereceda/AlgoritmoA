@@ -20,7 +20,14 @@ public class Botones extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Botones botones;
 
+	public static Botones getBotones() {
+		if(botones == null) {
+			botones = new Botones();
+		}
+		return botones;
+	}
 	public Botones() {
 		JButton run = new JButton("SIMULAR");
 		run.addActionListener(new ActionListener() {
@@ -43,6 +50,9 @@ public class Botones extends JPanel {
 							tablero.get(i).add(2);
 							x_salida = j;
 							y_salida = i;
+						}
+						else if(botones[i][j].getBackground() == Color.black) {
+							tablero.get(i).add(4);
 						}
 						else if(botones[i][j].getBackground() == Color.cyan) {
 							TButton wayPoint = new TButton(j,i);
@@ -77,11 +87,23 @@ public class Botones extends JPanel {
 			}
 		});
 		add(run);
-		JLabel jlabel_x = new JLabel("X");
-		add(jlabel_x);
-		JTextField text = new JTextField("6");
-		text.setSize(new Dimension(50, 50));
-		add(text);
+		JButton reset = new JButton("Reset");
+		reset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Tablero.getTablero(0).setMetas(0);
+				Tablero.getTablero(0).setWayPoints(new ArrayList<TButton>());
+				Tablero.getTablero(0).setSalidas(0);
+				for(int i= 0; i < Tablero.getTablero(0).getBotones().length; i++) {
+					for(int j = 0; j < Tablero.getTablero(0).getBotones()[i].length; j++) {
+						JButton aux = Tablero.getTablero(0).getBotones()[j][i];
+						aux.setText("");
+						aux.setBackground(Color.green);
+					}
+				}
+			}
+		});
+		add(reset);
 	}
 
 }
