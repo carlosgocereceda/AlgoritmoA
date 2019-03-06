@@ -59,7 +59,10 @@ public class Nodo {
 	}
 
 	public double getDistanciaPadre() {
-		return distanciaPadre;
+		if(tipo == 4) {
+			return distanciaPadre + 1.0;
+		}
+		else return distanciaPadre;
 	}
 
 	public void setDistanciaPadre(double distanciaPadre) {

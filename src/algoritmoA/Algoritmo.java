@@ -213,6 +213,7 @@ public class Algoritmo {
 					case 1: nodos.get(i).add(new Nodo(null, 0.0, 1, j, i)); break;
 					case 2: nodos.get(i).add(new Nodo(null, 0.0, 2, j, i)); break;
 					case 3: nodos.get(i).add(new Nodo(null, 0.0, 3, j, i)); break;
+					case 4: nodos.get(i).add(new Nodo(null, 0.0, 4, j, i)); break;
 					default: nodos.get(i).add(new Nodo(null, 0.0 , 0, j, i)); break;
 				}
 				
