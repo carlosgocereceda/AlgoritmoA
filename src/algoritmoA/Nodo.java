@@ -59,14 +59,14 @@ public class Nodo {
 	}
 
 	public double getDistanciaPadre() {
-		if(tipo == 4) {
-			return distanciaPadre + 1.0;
-		}
-		else return distanciaPadre;
+		return distanciaPadre;
 	}
 
 	public void setDistanciaPadre(double distanciaPadre) {
-		this.distanciaPadre = distanciaPadre;
+		if(tipo == 4)
+			this.distanciaPadre = distanciaPadre * 2;
+		else
+			this.distanciaPadre = distanciaPadre;
 	}
 
 	public double getDistanciaTotal() {

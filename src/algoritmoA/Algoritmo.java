@@ -72,7 +72,7 @@ public class Algoritmo {
 			System.out.println("x: " + cerrada.get(i).getX() + " y: " + cerrada.get(i).getY());
 		}
 		System.out.println("---------------------------");
-		//dibujaSol();
+		dibujaSol();
 		
 	}
 	public ArrayList<Nodo> dibujaSol() {
@@ -178,6 +178,9 @@ public class Algoritmo {
 		return res;
 	}
 	private void reevalua(Nodo nodoRecalcular, Nodo posibleNuevoPadre, double distEntreEllos) {
+		if(nodoRecalcular.getX() == 5 && nodoRecalcular.getY() == 4) {
+			System.out.println("PAUSA");
+		}
 		double distOriginal = 0.0;
 		double distNueva = 0.0;
 		distNueva += distEntreEllos;
@@ -198,6 +201,7 @@ public class Algoritmo {
 		}
 		if(distNueva < distOriginal) {
 			nodoRecalcular.setPadre(posibleNuevoPadre);
+			nodoRecalcular.setDistanciaPadre(distEntreEllos);
 			nodoRecalcular.setDistanciaTotal(distNueva + nodoRecalcular.getD());
 		}
 		
@@ -213,7 +217,6 @@ public class Algoritmo {
 					case 1: nodos.get(i).add(new Nodo(null, 0.0, 1, j, i)); break;
 					case 2: nodos.get(i).add(new Nodo(null, 0.0, 2, j, i)); break;
 					case 3: nodos.get(i).add(new Nodo(null, 0.0, 3, j, i)); break;
-					case 4: nodos.get(i).add(new Nodo(null, 0.0, 4, j, i)); break;
 					default: nodos.get(i).add(new Nodo(null, 0.0 , 0, j, i)); break;
 				}
 				
